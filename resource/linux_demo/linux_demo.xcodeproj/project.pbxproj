@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXGroup section */
-		D7BEB62317E9CBD50045F4D6 = {
+		D77713C517E9CF3000ADF61B = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -16,19 +16,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXProject section */
-		D7BEB62417E9CBD50045F4D6 /* Project object */ = {
+		D77713C617E9CF3000ADF61B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = D7BEB62717E9CBD50045F4D6 /* Build configuration list for PBXProject "linux-demo" */;
+			buildConfigurationList = D77713C917E9CF3000ADF61B /* Build configuration list for PBXProject "linux_demo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = D7BEB62317E9CBD50045F4D6;
+			mainGroup = D77713C517E9CF3000ADF61B;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -37,13 +37,13 @@
 /* End PBXProject section */
 
 /* Begin XCBuildConfiguration section */
-		D7BEB62817E9CBD50045F4D6 /* Debug */ = {
+		D77713CA17E9CF3000ADF61B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		D7BEB62917E9CBD50045F4D6 /* Release */ = {
+		D77713CB17E9CF3000ADF61B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
@@ -52,16 +52,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D7BEB62717E9CBD50045F4D6 /* Build configuration list for PBXProject "linux-demo" */ = {
+		D77713C917E9CF3000ADF61B /* Build configuration list for PBXProject "linux_demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D7BEB62817E9CBD50045F4D6 /* Debug */,
-				D7BEB62917E9CBD50045F4D6 /* Release */,
+				D77713CA17E9CF3000ADF61B /* Debug */,
+				D77713CB17E9CF3000ADF61B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D7BEB62417E9CBD50045F4D6 /* Project object */;
+	rootObject = D77713C617E9CF3000ADF61B /* Project object */;
 }

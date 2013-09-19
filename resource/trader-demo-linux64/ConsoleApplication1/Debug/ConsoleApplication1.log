@@ -1,0 +1,32 @@
+﻿生成启动时间为 2013/9/18 21:47:04。
+项目“E:\devshare\resource\trader-demo-linux64\ConsoleApplication1\ConsoleApplication1.vcxproj”在节点 2 上(Build 个目标)。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\CTPTrading.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\CTPTrading\CTPTradingApp.cpp ..\..\CTPTrading\FrameMain.cpp ConsoleApplication1.cpp
+  FrameMain.cpp
+e:\devshare\resource\ctptrading\framemain.cpp(1): warning C4627: “#include "FrameMain.h"”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\framemain.cpp(4): warning C4627: “#include <wx/intl.h>”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\framemain.cpp(5): warning C4627: “#include <wx/string.h>”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\framemain.cpp(8): warning C4627: “#include "trade.h"”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\framemain.cpp(9): warning C4627: “#include "quote.h"”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\framemain.cpp(1320): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  CTPTradingApp.cpp
+e:\devshare\resource\ctptrading\ctptradingapp.cpp(10): warning C4627: “#include "CTPTradingApp.h"”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\ctptradingapp.cpp(13): warning C4627: “#include "FrameMain.h"”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\ctptradingapp.cpp(14): warning C4627: “#include <wx/image.h>”: 在查找预编译头使用时跳过
+          将指令添加到“stdafx.h”或重新生成预编译头
+e:\devshare\resource\ctptrading\ctptradingapp.cpp(34): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  正在生成代码...
+  正在跳过...(未检测到相关更改)
+  ConsoleApplication1.cpp
+已完成生成项目“E:\devshare\resource\trader-demo-linux64\ConsoleApplication1\ConsoleApplication1.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.90

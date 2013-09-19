@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <sys/sem.h>
+//#include <sys/sem.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,20 +11,20 @@
 
 using namespace std;
 
-TThostFtdcBrokerIDType appId;		// 应用单元
-TThostFtdcUserIDType userId;		// 投资者代码
+extern TThostFtdcBrokerIDType appId;		// 应用单元
+extern TThostFtdcUserIDType userId;		// 投资者代码
 
 
 extern int requestId; 
 extern CSem sem;
 
 // 会话参数
-int	 frontId;	//前置编号
-int	 sessionId;	//会话编号
-char orderRef[13];
+extern int	 frontId;	//前置编号
+extern int	 sessionId;	//会话编号
+extern char orderRef[13];
 
-vector<CThostFtdcOrderField*> orderList;
-vector<CThostFtdcTradeField*> tradeList;
+extern vector<CThostFtdcOrderField*> orderList;
+extern vector<CThostFtdcTradeField*> tradeList;
 
 char MapDirection(char src, bool toOrig);
 char MapOffset(char src, bool toOrig);
@@ -46,8 +46,8 @@ void CtpTraderSpi::ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
 	strcpy(req.BrokerID, vAppId); strcpy(appId, vAppId); 
 	strcpy(req.UserID, vUserId);  strcpy(userId, vUserId); 
 	strcpy(req.Password, vPasswd);
-	int ret = pUserApi->ReqUserLogin(&req, ++requestId);
-  cerr<<" 请求 | 发送登录..."<<((ret == 0) ? "成功" :"失败") << endl;	
+	int ret = this->api->ReqUserLogin(&req, ++requestId);
+    cerr<<" 请求 | 发送登录..."<<((ret == 0) ? "成功" :"失败") << endl;	
 }
 
 void CtpTraderSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin,
@@ -71,7 +71,7 @@ void CtpTraderSpi::ReqSettlementInfoConfirm()
 	memset(&req, 0, sizeof(req));
 	strcpy(req.BrokerID, appId);
 	strcpy(req.InvestorID, userId);
-	int ret = pUserApi->ReqSettlementInfoConfirm(&req, ++requestId);
+	int ret = this->api->ReqSettlementInfoConfirm(&req, ++requestId);
 	cerr<<" 请求 | 发送结算单确认..."<<((ret == 0)?"成功":"失败")<<endl;
 }
 
