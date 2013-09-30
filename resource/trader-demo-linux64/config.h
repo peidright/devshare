@@ -35,4 +35,14 @@ typedef enum LoginStatus {
 	LOGIN=1,
 	FAIL=2
 }LoginStatus;
+
+
+
+
+extern string g_username;
+extern string g_password;
+extern string g_brokerid;
+extern string g_trade_addr;
+extern string g_quote_addr;
+
 #endif

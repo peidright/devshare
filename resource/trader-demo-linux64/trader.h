@@ -8,9 +8,8 @@ public:
 	string password;
 	string brokerid;
 	string trade_addr;
-	Trader(string username,string password,string brokerid,string trade_addr);
+	string quote_addr;
+	Trader(string username,string password,string brokerid,string trade_addr,string quote_addr);
 };
-
-
 
 #endif

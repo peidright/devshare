@@ -2,9 +2,10 @@
 #define CTPTRADER_H_
 #include "CtpQuote.h"
 #include "CtpTrade.h"
+class CtpTradeSpi;
 class CtpTrader{
 public:
-	CtpTradeSpi *trade_spi;
+	CtpTradeSpi * trade_spi;
 	//CtpTradeApi *api;
 	CThostFtdcTraderApi* trade_api;
 
