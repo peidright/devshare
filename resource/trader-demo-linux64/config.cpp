@@ -1,6 +1,7 @@
 #include "config.h"
-
+#include <vector>
 using namespace std;
+
 TThostFtdcBrokerIDType appId;		// 应用单元
 TThostFtdcUserIDType userId;		// 投资者代码
 
@@ -20,3 +21,4 @@ string g_password="123456";
 string g_brokerid="1017";
 string g_trade_addr="tcp://ctpmn1-front1.citicsf.com:51205";
 string g_quote_addr="tcp://ctpmn1-front1.citicsf.com:51213";
+vector<string> g_product_list;

@@ -37,12 +37,13 @@ typedef enum LoginStatus {
 }LoginStatus;
 
 
-
+#define MAX_INSTS 1000
 
 extern string g_username;
 extern string g_password;
 extern string g_brokerid;
 extern string g_trade_addr;
 extern string g_quote_addr;
+extern vector<string> g_product_list;
 
 #endif

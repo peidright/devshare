@@ -31,6 +31,8 @@ public:
 	   this->frontId=0;
 	   this->sessionId=0;
 	   this->nextOrderRef=0;
+	   this->confirm=0;
+	   this->login_status=0;
    };
    ~CtpTradeSpi(){};
 
