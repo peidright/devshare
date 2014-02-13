@@ -1,4 +1,5 @@
 #include "CtpQuote.h"
+#include "msgqueue.h"
 #include "config.h"
 #include <string>
 #include <assert.h>
@@ -12,6 +13,8 @@ using namespace std;
 	md->Init();
 	*/
 }
+
+
 /*
 void CtpQuoteApi::Init()
 {
@@ -70,13 +73,14 @@ void CtpQuoteSpi::OnFrontConnected()
 	strcpy(f.Password, "123456");
 	md->ReqUserLogin(&f, ++nReq);
 	*/
-	cerr <<"md connected"<<endl;
-		this->ReqUserLogin((char*)this->trader->brokerid.c_str(),
-		(char*)this->trader->username.c_str(),
-		(char*)this->trader->password.c_str()
-		);
+	msg_t *msg=new(msg_t);
+	msg->len=0;
+	msg->data=new(QOnFrontConnected_t);
+	msg->type=QOnFrontConnected;
+    this->ctpquoter->post_msg(msg);
+
 }
-void CtpQuoteSpi::ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
+int CtpQuoteSpi::ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
 	        TThostFtdcUserIDType	vUserId,	TThostFtdcPasswordType	vPasswd)
 {
 	CThostFtdcReqUserLoginField req;
@@ -90,6 +94,7 @@ void CtpQuoteSpi::ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
 		this->login_status=FAIL;
 	}
 	cerr<<" md 请求 | 发送登录..."<<((ret == 0) ? "成功" :"失败") << endl;
+	return ret;
 }
 
 void CtpQuoteSpi::OnFrontDisconnected(int nReason)
@@ -103,40 +108,42 @@ void CtpQuoteSpi::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, b
 }
 void CtpQuoteSpi::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
+	cout<<pSpecificInstrument->InstrumentID<<std::endl;
+	cout<<pRspInfo->ErrorID<<pRspInfo->ErrorMsg<<std::endl;
+	msg_t *msg=new(msg_t);
+	QOnRspSubMarketData_t *data=new(QOnRspSubMarketData_t);
+	msg->len=sizeof(QOnRspSubMarketData_t);
+	msg->data=(void*)data;
+	msg->type=QOnRspSubMarketData;
+    this->ctpquoter->post_msg(msg);
 }
 void CtpQuoteSpi::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
+	cout<<pSpecificInstrument->InstrumentID<<std::endl;
+	cout<<pRspInfo->ErrorID<<pRspInfo->ErrorMsg<<std::endl;
+	msg_t *msg=new(msg_t);
+	QOnRspUnSubMarketData_t *data=new(QOnRspUnSubMarketData_t);
+	msg->len=sizeof(QOnRspUnSubMarketData_t);
+	msg->data=(void*)data;
+	msg->type=QOnRspUnSubMarketData;
+    this->ctpquoter->post_msg(msg);
 }
+
 void CtpQuoteSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
 	/**/
-	int count;
-	
-	count=g_product_list.size();
-	char ** ppInst = (char**)new char *[MAX_INSTS];
-	//char insts[MAX_INSTS][32];
-	//ppInst=(char**)insts;
-	//memset(insts,0x0, sizeof(insts));
-	cerr<<"md login sucess: "<<count<<endl;
-	//g_product_list
-	assert(count <MAX_INSTS);
-	for(int i=0;i<MAX_INSTS;i++) {
-		ppInst[i]=(char*)0;
-	}
-	for(int i=0;i<count;i++) {
-		    ppInst[i]=new char[32];
-			strcpy(ppInst[i], g_product_list[i].c_str());
-			printf("insts is %s\n",ppInst[i]);
-	}
-	//return;
-	//char inst[32];
-	//strcpy(inst, "cu1401");
-	//char*ppInst[1];
+	cout<<pRspInfo->ErrorID<<pRspInfo->ErrorMsg<<std::endl;
+	msg_t *msg=new(msg_t);
+	QOnRspUserLogin_t *data=new(QOnRspUserLogin_t);
+	data->bIsLast=bIsLast;
+	data->nRequestID=nRequestID;
+	memcpy(&data->pRspInfo,pRspInfo,sizeof(pRspInfo));
+	memcpy(&data->pRspUserLogin,pRspUserLogin,sizeof(pRspUserLogin));
+	msg->len=sizeof(QOnRspUserLogin_t);
+	msg->data=(void*)data;
+	msg->type=QOnRspUserLogin;
+	this->ctpquoter->post_msg(msg);
 
-	//ppInst[0] = inst;
-	this->api->SubscribeMarketData(ppInst, count);
-	cout<<"md subscribeMarketDate cu1401"<<endl;
-	delete [] ppInst;
 }
 
 void CtpQuoteSpi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
@@ -145,6 +152,7 @@ void CtpQuoteSpi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThost
 
 void dump_depthmarketdata(CThostFtdcDepthMarketDataField *dmd)
 {
+	//
 	cout<<"业务日期         ActionDay :     "<<dmd->ActionDay<<endl;
 	cout<<"交易所代码       ExchangeID:     "<<dmd->ExchangeID<<endl;
 	cout<<"更新时间         UpdateTime:     "<<dmd->UpdateTime<<endl;
@@ -157,7 +165,7 @@ void dump_depthmarketdata(CThostFtdcDepthMarketDataField *dmd)
 	cout<<"最高价         HighestPrice:     "<<dmd->HighestPrice<<endl;
 	cout<<"最低价          LowestPrice:     "<<dmd->LowestPrice<<endl;
 	cout<<"本次结算价  SettlementPrice:     "<<dmd->SettlementPrice<<endl;
-	cout<<"昨天结算价  PreSettlementPrice:  "<<dmd->PreSettlementPrice<<endl;
+	cout<<"上次结算价  PreSettlementPrice:  "<<dmd->PreSettlementPrice<<endl;
 	cout<<"涨停板价    UpperLimitPrice:     "<<dmd->UpperLimitPrice<<endl;
 	cout<<"跌停板价    LowerLimitPrice:     "<<dmd->LowerLimitPrice<<endl;
 	cout<<"昨虚实度           PreDelta:     "<<dmd->PreDelta<<endl;
@@ -166,6 +174,7 @@ void dump_depthmarketdata(CThostFtdcDepthMarketDataField *dmd)
 	cout<<"成交金额           Turnover:     "<<dmd->Turnover<<endl;
 	cout<<"持仓量         OpenInterest:     "<<dmd->OpenInterest<<endl;
 	cout<<"买1               BidPrice1:     "<<dmd->BidPrice1<<endl;
+	cout<<"最新价            LastPrice:     "<<dmd->LastPrice<<endl;
 	/*
 	cout<<"买2               BidPrice2:     "<<dmd->BidPrice2<<endl;
 	cout<<"买3               BidPrice3:     "<<dmd->BidPrice3<<endl;

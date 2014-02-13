@@ -6,11 +6,105 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		D77713CE17E9CF4C00ADF61B /* TestTrader */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTrader; sourceTree = "<group>"; };
+		D77713D017E9CF4C00ADF61B /* CSem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSem.h; sourceTree = "<group>"; };
+		D77713D117E9CF4C00ADF61B /* CtpTraderSpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CtpTraderSpi.h; sourceTree = "<group>"; };
+		D77713D217E9CF4C00ADF61B /* ThostFtdcMdApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThostFtdcMdApi.h; sourceTree = "<group>"; };
+		D77713D317E9CF4C00ADF61B /* ThostFtdcTraderApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThostFtdcTraderApi.h; sourceTree = "<group>"; };
+		D77713D417E9CF4C00ADF61B /* ThostFtdcUserApiDataType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThostFtdcUserApiDataType.h; sourceTree = "<group>"; };
+		D77713D517E9CF4C00ADF61B /* ThostFtdcUserApiStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThostFtdcUserApiStruct.h; sourceTree = "<group>"; };
+		D77713D717E9CF4C00ADF61B /* libthostmduserapi32.so */ = {isa = PBXFileReference; lastKnownFileType = file; path = libthostmduserapi32.so; sourceTree = "<group>"; };
+		D77713D817E9CF4C00ADF61B /* libthostmduserapi64.so */ = {isa = PBXFileReference; lastKnownFileType = file; path = libthostmduserapi64.so; sourceTree = "<group>"; };
+		D77713D917E9CF4C00ADF61B /* libthosttraderapi32.so */ = {isa = PBXFileReference; lastKnownFileType = file; path = libthosttraderapi32.so; sourceTree = "<group>"; };
+		D77713DA17E9CF4C00ADF61B /* libthosttraderapi64.so */ = {isa = PBXFileReference; lastKnownFileType = file; path = libthosttraderapi64.so; sourceTree = "<group>"; };
+		D77713DC17E9CF4C00ADF61B /* 1 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 1; sourceTree = "<group>"; };
+		D77713DD17E9CF4C00ADF61B /* CSem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSem.cpp; sourceTree = "<group>"; };
+		D77713DE17E9CF4C00ADF61B /* CtpTraderSpi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CtpTraderSpi.cpp; sourceTree = "<group>"; };
+		D77713DF17E9CF4C00ADF61B /* DialogRsp.con */ = {isa = PBXFileReference; lastKnownFileType = file; path = DialogRsp.con; sourceTree = "<group>"; };
+		D77713E017E9CF4C00ADF61B /* error.dtd */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = error.dtd; sourceTree = "<group>"; };
+		D77713E117E9CF4C00ADF61B /* error.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = error.xml; sourceTree = "<group>"; };
+		D77713E217E9CF4C00ADF61B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D77713E317E9CF4C00ADF61B /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		D77713E417E9CF4C00ADF61B /* Private.con */ = {isa = PBXFileReference; lastKnownFileType = file; path = Private.con; sourceTree = "<group>"; };
+		D77713E517E9CF4C00ADF61B /* Public.con */ = {isa = PBXFileReference; lastKnownFileType = file; path = Public.con; sourceTree = "<group>"; };
+		D77713E617E9CF4C00ADF61B /* QueryRsp.con */ = {isa = PBXFileReference; lastKnownFileType = file; path = QueryRsp.con; sourceTree = "<group>"; };
+		D77713E717E9CF4C00ADF61B /* TestTrader */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTrader; sourceTree = "<group>"; };
+		D77713E817E9CF4C00ADF61B /* TradingDay.con */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradingDay.con; sourceTree = "<group>"; };
+		D77713E917E9CF4C00ADF61B /* tags */ = {isa = PBXFileReference; lastKnownFileType = text; path = tags; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		D77713C517E9CF3000ADF61B = {
 			isa = PBXGroup;
 			children = (
+				D77713CC17E9CF4C00ADF61B /* trader-demo-linux64 */,
 			);
+			sourceTree = "<group>";
+		};
+		D77713CC17E9CF4C00ADF61B /* trader-demo-linux64 */ = {
+			isa = PBXGroup;
+			children = (
+				D77713CD17E9CF4C00ADF61B /* bin */,
+				D77713CF17E9CF4C00ADF61B /* include */,
+				D77713D617E9CF4C00ADF61B /* lib */,
+				D77713DB17E9CF4C00ADF61B /* src */,
+				D77713E917E9CF4C00ADF61B /* tags */,
+			);
+			name = "trader-demo-linux64";
+			path = "../trader-demo-linux64";
+			sourceTree = "<group>";
+		};
+		D77713CD17E9CF4C00ADF61B /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				D77713CE17E9CF4C00ADF61B /* TestTrader */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		D77713CF17E9CF4C00ADF61B /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D77713D017E9CF4C00ADF61B /* CSem.h */,
+				D77713D117E9CF4C00ADF61B /* CtpTraderSpi.h */,
+				D77713D217E9CF4C00ADF61B /* ThostFtdcMdApi.h */,
+				D77713D317E9CF4C00ADF61B /* ThostFtdcTraderApi.h */,
+				D77713D417E9CF4C00ADF61B /* ThostFtdcUserApiDataType.h */,
+				D77713D517E9CF4C00ADF61B /* ThostFtdcUserApiStruct.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		D77713D617E9CF4C00ADF61B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D77713D717E9CF4C00ADF61B /* libthostmduserapi32.so */,
+				D77713D817E9CF4C00ADF61B /* libthostmduserapi64.so */,
+				D77713D917E9CF4C00ADF61B /* libthosttraderapi32.so */,
+				D77713DA17E9CF4C00ADF61B /* libthosttraderapi64.so */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		D77713DB17E9CF4C00ADF61B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D77713DC17E9CF4C00ADF61B /* 1 */,
+				D77713DD17E9CF4C00ADF61B /* CSem.cpp */,
+				D77713DE17E9CF4C00ADF61B /* CtpTraderSpi.cpp */,
+				D77713DF17E9CF4C00ADF61B /* DialogRsp.con */,
+				D77713E017E9CF4C00ADF61B /* error.dtd */,
+				D77713E117E9CF4C00ADF61B /* error.xml */,
+				D77713E217E9CF4C00ADF61B /* main.cpp */,
+				D77713E317E9CF4C00ADF61B /* Makefile */,
+				D77713E417E9CF4C00ADF61B /* Private.con */,
+				D77713E517E9CF4C00ADF61B /* Public.con */,
+				D77713E617E9CF4C00ADF61B /* QueryRsp.con */,
+				D77713E717E9CF4C00ADF61B /* TestTrader */,
+				D77713E817E9CF4C00ADF61B /* TradingDay.con */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

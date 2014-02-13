@@ -265,7 +265,7 @@ void CtpTradeSpi::ReqOrderInsert(TThostFtdcInstrumentIDType instId,
 	req.UserForceClose = 0;   //用户强评标志:否
 
 	int ret = this->api->ReqOrderInsert(&req, ++this->requestId);
-	cerr<<" 请求 | 发送报单..."<<((ret == 0)?"成功":"失败")<< endl;
+	//cerr<<" 请求 | 发送报单..."<<((ret == 0)?"成功":"失败")<< endl;
 }
 
 void CtpTradeSpi::OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, 
@@ -327,7 +327,7 @@ void CtpTradeSpi::OnRtnOrder(CThostFtdcOrderField *pOrder)
   }
   if(founded) orderList[i]= order;   
   else  orderList.push_back(order);
-  cerr<<" 回报 | 报单已提交...序号:"<<order->BrokerOrderSeq<<endl;
+  //cerr<<" 回报 | 报单已提交...序号:"<<order->BrokerOrderSeq<<endl;
   sem.sem_v();	
 }
 
@@ -362,6 +362,7 @@ void CtpTradeSpi::OnHeartBeatWarning(int nTimeLapse)
 
 void CtpTradeSpi::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
+	cout<<"error"<<endl;
 	IsErrorRspInfo(pRspInfo);
 }
 

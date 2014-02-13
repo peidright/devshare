@@ -2,6 +2,7 @@
 #define CTP_QUOTE_H_
 #include "ThostFtdcMdApi.h"
 #include "trader.h"
+#include "CtpQuoter.h"
 #include <string>
 using namespace std;
 class CtpQuoteApi:public CThostFtdcMdApi
@@ -81,9 +82,11 @@ class CtpQuoteSpi:public CThostFtdcMdSpi
 	public:
 	int login_status;
 	int requestId;
-	Trader *trader;
+	CtpQuoter* ctpquoter;
+
+	//Quoter *quoter;
 	///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
-	CtpQuoteSpi(CThostFtdcMdApi* api, Trader *trader):api(api){this->trader=trader;};
+	CtpQuoteSpi(CThostFtdcMdApi* api, CtpQuoter *ctpquoter):api(api){this->ctpquoter=ctpquoter;};
 
 
 	virtual void OnFrontConnected();
@@ -100,7 +103,7 @@ class CtpQuoteSpi:public CThostFtdcMdSpi
 	///心跳超时警告。当长时间未收到报文时，该方法被调用。
 	///@param nTimeLapse 距离上次接收报文的时间
 	virtual void OnHeartBeatWarning(int nTimeLapse);
-	void ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
+	int  ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
 	        TThostFtdcUserIDType	vUserId,	TThostFtdcPasswordType	vPasswd);
 
 	///登录请求响应

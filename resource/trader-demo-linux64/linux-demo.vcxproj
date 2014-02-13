@@ -62,7 +62,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\devshare\resource\trader-demo-linux64\include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\devshare\resource\trader-demo-linux64\include;E:\devshare\resource\sqlite308;C:\Python34\include;E:\devshare\resource\LuaJIT-2.0.2\src;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
@@ -84,13 +84,14 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>E:\boost_1_54_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>thosttraderapi.lib;thostmduserapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\devshare\resource\CTP_DEMO2013\api_ctp_130402;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_regex-vc110-mt-gd-1_54.lib;lua51.lib;python34.lib;thosttraderapi.lib;thostmduserapi.lib;sqlite308.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\devshare\resource\CTP_DEMO2013\api_ctp_130402;E:\devshare\resource\sqlite308;C:\Python34\libs;E:\devshare\resource\LuaJIT-2.0.2\src;E:\boost_1_54_0\bin.v2\libs\regex\build\msvc-11.0\debug\link-static\threading-multi;E:\boost_1_54_0\bin.v2\libs\thread\build\msvc-11.0\debug\link-static\threading-multi;E:\boost_1_54_0\bin.v2\libs\date_time\build\msvc-11.0\debug\link-static\threading-multi;E:\boost_1_54_0\bin.v2\libs\system\build\msvc-11.0\debug\link-static\threading-multi;E:\boost_1_54_0\bin.v2\libs\chrono\build\msvc-11.0\debug\link-static\threading-multi;E:\boost_1_54_0\bin.v2\libs\signals\build\msvc-11.0\debug\link-static\threading-multi;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -137,11 +138,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="account.cpp" />
+    <ClCompile Include="boosthelp.cpp" />
     <ClCompile Include="config.cpp" />
     <ClCompile Include="CtpQuote.cpp" />
+    <ClCompile Include="CtpQuoter.cpp" />
     <ClCompile Include="CtpTrade.cpp" />
     <ClCompile Include="CtpTrader.cpp" />
+    <ClCompile Include="datalocal.cpp" />
+    <ClCompile Include="dseries.cpp" />
+    <ClCompile Include="luajit_support.cpp" />
     <ClCompile Include="market.cpp" />
+    <ClCompile Include="mdseries.cpp" />
+    <ClCompile Include="msgqueue.cpp" />
+    <ClCompile Include="ntp.cpp" />
+    <ClCompile Include="python_support.cpp" />
     <ClCompile Include="Quote.cpp" />
     <ClCompile Include="src\CSem.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -149,23 +160,38 @@
     <ClCompile Include="trader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="account.h" />
+    <ClInclude Include="boosthelp.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="CtpQuote.h" />
+    <ClInclude Include="CtpQuoter.h" />
     <ClInclude Include="CtpTrade.h" />
     <ClInclude Include="CtpTrader.h" />
+    <ClInclude Include="datalocal.h" />
+    <ClInclude Include="dseries.h" />
     <ClInclude Include="include\CSem.h" />
     <ClInclude Include="include\CtpTraderSpi.h" />
     <ClInclude Include="include\ThostFtdcMdApi.h" />
     <ClInclude Include="include\ThostFtdcTraderApi.h" />
     <ClInclude Include="include\ThostFtdcUserApiDataType.h" />
     <ClInclude Include="include\ThostFtdcUserApiStruct.h" />
+    <ClInclude Include="luajit_support.h" />
     <ClInclude Include="market.h" />
+    <ClInclude Include="mdseries.h" />
+    <ClInclude Include="msgqueue.h" />
+    <ClInclude Include="ntp.h" />
+    <ClInclude Include="python_support.h" />
     <ClInclude Include="quote.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="StrategyFrame.h" />
     <ClInclude Include="trader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="default1.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CTP_DemoLin.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

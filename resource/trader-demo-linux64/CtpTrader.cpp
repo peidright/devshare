@@ -14,8 +14,9 @@ CtpTrader::CtpTrader(Trader *trader)
 	trade_api->RegisterFront((char*)trader->trade_addr.c_str());	// 注册交易前置地址
 	trade_api->Init();
 	cout<<"end api"<<endl;
-	//return;
 	
+	//return;
+	/*
 	CThostFtdcMdApi *quote_api = CThostFtdcMdApi::CreateFtdcMdApi(QUOTE_DIR);
 	CtpQuoteSpi *quote_spi = new CtpQuoteSpi(quote_api,trader);
 	quote_api->RegisterSpi((CThostFtdcMdSpi*)quote_spi);
@@ -24,6 +25,7 @@ CtpTrader::CtpTrader(Trader *trader)
 	quote_api->Init();
 	cout<<"i am here"<<endl;
 	getchar();
+	*/
 	/*
 	md->Init();
 	cout<<"market init"<<endl;
