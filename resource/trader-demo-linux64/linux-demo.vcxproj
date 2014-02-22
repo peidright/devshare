@@ -147,6 +147,7 @@
     <ClCompile Include="CtpTrader.cpp" />
     <ClCompile Include="datalocal.cpp" />
     <ClCompile Include="dseries.cpp" />
+    <ClCompile Include="help.cpp" />
     <ClCompile Include="luajit_support.cpp" />
     <ClCompile Include="market.cpp" />
     <ClCompile Include="mdseries.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="CtpTrader.h" />
     <ClInclude Include="datalocal.h" />
     <ClInclude Include="dseries.h" />
+    <ClInclude Include="help.h" />
     <ClInclude Include="include\CSem.h" />
     <ClInclude Include="include\CtpTraderSpi.h" />
     <ClInclude Include="include\ThostFtdcMdApi.h" />
