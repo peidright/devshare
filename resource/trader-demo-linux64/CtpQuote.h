@@ -5,6 +5,9 @@
 #include "CtpQuoter.h"
 #include <string>
 using namespace std;
+
+class CtpQuoter;
+
 class CtpQuoteApi:public CThostFtdcMdApi
 {
 	/*
@@ -103,8 +106,6 @@ class CtpQuoteSpi:public CThostFtdcMdSpi
 	///心跳超时警告。当长时间未收到报文时，该方法被调用。
 	///@param nTimeLapse 距离上次接收报文的时间
 	virtual void OnHeartBeatWarning(int nTimeLapse);
-	int  ReqUserLogin(TThostFtdcBrokerIDType	vAppId,
-	        TThostFtdcUserIDType	vUserId,	TThostFtdcPasswordType	vPasswd);
 
 	///登录请求响应
 	virtual void OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) ;
@@ -123,6 +124,10 @@ class CtpQuoteSpi:public CThostFtdcMdSpi
 
 	///深度行情通知
 	virtual void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData) ;
+
+	/*add by me*/
+	int  ReqUserLogin(TThostFtdcBrokerIDType	appId,
+		TThostFtdcUserIDType	userId,	TThostFtdcPasswordType	passwd);
 private:
 	CThostFtdcMdApi *api;
 };
@@ -133,7 +138,6 @@ class CtpQuote
 {
 public:
 	CThostFtdcMdApi *api;
-	//CtpQuoteApi *api;
 	CtpQuoteSpi *spi;
 	CtpQuote(string username,string password, string quote_addr);
 };

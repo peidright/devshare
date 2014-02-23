@@ -137,9 +137,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="msgqueue.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="boosthelp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -156,6 +153,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="help.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msgqueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

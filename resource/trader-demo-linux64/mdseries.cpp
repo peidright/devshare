@@ -5,25 +5,9 @@
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 
-enum update_status {
-	CURRENT_BAR,
-	NEXT_BAR,
-	NNEXT_BAR,
-	NNNEXT_BAR,
-	PREV_BAR,
-};
 
 
-class mdseries {
-public:
-	int period;/*周期*/    
-	period_type ptype;/*周期类型*/
-	dseries  high;
-	dseries  low;
-	dseries open;
-	dseries close;
-	dseries volume;
-	update_status get_update_status(int b1,int b2,int e1,int e2,int n1,int n2,period_type ptype) {
+update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int n2,period_type ptype) {
 		/*
 		b1 当前bar的开始.
 		e1 当前bar的结束.
@@ -75,10 +59,9 @@ public:
 			assert(0);
 			cout<<"err"<<endl;
 			break;
-		}
-
-	};
-	int updatems(float v, int b1, int b2) {
+	}
+}
+	int mdseries::updatems(float v, int b1, int b2) {
 			/*todo lock 
 			  1.计算...
 			  如果是当前这根K线上的。就更新当前这根k线。如果不是。
@@ -91,7 +74,7 @@ public:
 			*/	    
 	};
 
-	int updateme(float v, int b1, int b2) {
+	int mdseries::updateme(float v, int b1, int b2) {
 			/*todo lock 
 			  1.计算...
 			  如果是当前这根K线上的。就更新当前这根k线。如果不是。
@@ -104,7 +87,7 @@ public:
 			*/
 		    
 	};
-};
+
 
 
 
@@ -114,25 +97,21 @@ public:
 #define LOW_FLAG   0x08
 #define VOLUME_FLAG 0x10
 
-class md {
-public:
-	int regmd(int period) {
+
+int md::regmd(int period) {
 		/*注册一个周期*/
 	};
-	int drivemd() {
+int md::drivemd() {
 		/*行情驱动,更新各个周期*/
-	};
+};
 	
-	map<int, mdseries> mds;
-	vector<int>         perids;
-	dseries             ds;  /*base misc service*/
-	int update(string contract, float v, int t1, int t2) {
+int md::update(string contract, float v, int t1, int t2) {
 		/*1.更新 ds
 		  2.更新 分钟线。
 		  3.更新 x周期线。
 		  每次更新，都反馈是否要更新下次线的四个值。
 		*/
-		int status=this->ds.update(v,t1,t2);
+		int status=this->ds.update_ms(v,t1,t2);
 		if(status <0) {
 			/**/
 		}else {
@@ -143,7 +122,8 @@ public:
 			c=ds[0];
 			e1=ds.csec;
 			e2=ds.cmsec;
-			status=mds[1].update500ms(c,e1,e2);
+			//status=mds[1].update50(c,e1,e2);
+			status=mds[1].updateme(c,e1,e2);
 
 
 			/*更新其他周期*/
@@ -157,16 +137,16 @@ public:
 			for(vector<int>::iterator it=perids.begin();it!=perids.end();it++) {
 				int temp=0;
 				if(status & OPEN_FLAG) {
-					temp=temp | mds[*it].open.update(o,e1,e2);
+					temp=temp | mds[*it].open.update_me(o,e1,e2,OPEN,MIRCO,1);
 				}
 				if(status & CLOSE_FLAG) {
-					temp=temp | mds[*it].close.update(c,e1,e2);
+					temp=temp | mds[*it].close.update_me(c,e1,e2,CLOSE,MIRCO,1);
 				}
 				if(status & HIGH_FLAG) {
-					temp=temp | mds[*it].high.update(h,e1,e2);
+					temp=temp | mds[*it].high.update_me(h,e1,e2,HIGH,MIRCO,1);
 				}
 				if(status & LOW_FLAG) {
-					temp=temp | mds[*it].low.update(l,e1,e2);
+					temp=temp | mds[*it].low.update_me(l,e1,e2,LOW,MIRCO,1);
 				}
 				if(status & VOLUME_FLAG) {
 					//vol how to process
@@ -177,30 +157,24 @@ public:
 		}
 	}
 
-	int update_timer()
-	{
+int md::update_timer()
+{
 		/*
 			每1秒运行一次。
 			如果当前是xx周期的开始，并且当前周期没有行情，就默认填充行情。
 			只考虑分钟及分钟以上级别周期.
 		*/
-	};
-
 };
 
-class mdservice {
-	/*每个md一个线程*/
-	map<string, md> mds;
-	/*todo 读写锁*/
-	int md(string contract,int period, int bar){};
-	int update(string contract, float v, int t1, int t2);
-	int update_timer() {
+
+int mdservice::md(string contract,int period, int bar){};
+int mdservice::update(string contract, float v, int t1, int t2){};
+int mdservice::update_timer() {
 		/*
 			每1秒运行一次。
 			如果当前是xx周期的开始，填补默认行情。
 		*/
-	}
+}
 	/*定时器，负责定时更新各个合约的各个周期线
 	  回报，只负责更新其自身对应的那个分钟线。分钟线定时更新上面各个周期的线。
 	*/
-};

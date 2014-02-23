@@ -1,9 +1,9 @@
 #include "msgqueue.h"
 #include <deque>
-deque<msg_t> control_msg;
+std::deque<msg_t> control_msg;
 //deque<msg_t> g_quote_msg;
-deque<msg_t> priority_msg;
-deque<msg_t> g_quote_queue;
+std::deque<msg_t> priority_msg;
+std::deque<msg_t> g_quote_queue;
 
 boost::interprocess::interprocess_semaphore g_quote_sem(0);
 boost::timed_mutex g_quote_mutex;
@@ -117,19 +117,19 @@ void quote_process()
 		if(g_quote_queue.size() > 0)  {
 			boost::unique_lock<boost::timed_mutex> lk(g_quote_mutex,boost::chrono::milliseconds(1));
 			if(lk) {
-				deque<msg_t> quote_queue;
+				std::deque<msg_t> quote_queue;
 				quote_queue.swap(g_quote_queue);
 				lk.unlock();
 
-				for(deque<msg_t>::iterator it=quote_queue.begin();it!=quote_queue.end();it++) {
+				for(std::deque<msg_t>::iterator it=quote_queue.begin();it!=quote_queue.end();it++) {
 					quote_stm(*it);
 				}
 				quote_queue.clear();
 			}else {
-				cout<<"dead locked ??"<<std::endl;
+				std::cout<<"dead locked ??"<<std::endl;
 			}
 		}else {
-			cout<<"size zero"<<std::endl;
+			std::cout<<"size zero"<<std::endl;
 		}
 	}
 }

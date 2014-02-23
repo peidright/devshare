@@ -397,6 +397,7 @@ again:
 			ret=this->cb(v,sec,msec);
 			goto again;
 		}
+	return 0;
 }
 
 int dseries::update_other(float v, int sec, int msec, period_type ptype,kdata_type ktype,int period){

@@ -51,10 +51,11 @@ void CtpQuoter::post_msg(msg_t *msg)
 	/*lock
 	*/
 again:
-	boost::unique_lock<boost::timed_mutex> lk(this->mmutex,boost::chrono::milliseconds(1));
+	boost::unique_lock<boost::timed_mutex> lk(this->qmutex,boost::chrono::milliseconds(1));
 	if(lk) {
 		this->mqueue.push_back(*msg);
-		this->msem.post();
+		this->qsem.post();
+		
 		lk.unlock();
 	}else {
 		/*
@@ -175,8 +176,22 @@ int CtpQuoter::DepthMarketProcess(msg_t &msg)
 		把数据拷贝到io线程等待入库.(暂时io直接入库)
 	*/
 }
+/*
+int CtpQuoter::ReqUserLogin(char *broker, char *username, char *password)
+{
+	
+	CThostFtdcReqUserLoginField req;
+	memset(&req, 0, sizeof(req));
+	strcpy(req.BrokerID, BROKER_ID);
+	strcpy(req.UserID, INVESTOR_ID);
+	strcpy(req.Password, PASSWORD);
+	int iResult = pUserApi->ReqUserLogin(&req, ++iRequestID);
+	cerr << "--->>> 发送用户登录请求: " << ((iResult == 0) ? "成功" : "失败") << endl;
+	
 
-
+	return 0;
+}
+*/
 void DepthMarketProcess(CtpQuoter *ctpquoter, int key)
 {
 	
@@ -184,13 +199,13 @@ void DepthMarketProcess(CtpQuoter *ctpquoter, int key)
 		ctpquoter->qsem_map[key].wait();
 		boost::unique_lock<boost::timed_mutex> lk(ctpquoter->qmutex_map[key],boost::chrono::milliseconds(1));
 		if (lk) {
-			if(ctpquoter->qqueue[key].size()<=0) {
+			if(ctpquoter->mqueue_map[key].size()<=0) {
 				/*bug happen*/
 				cout<<"should not be zero qqueue"<<std::endl;
 				lk.unlock();
 			}
-			msg_t msg=ctpquoter->qmutex[key][0];
-			ctpquoter->qqueue[key].pop_front();
+			msg_t msg=ctpquoter->mqueue_map[key][0];
+			ctpquoter->mqueue_map[key].pop_front();
 			lk.unlock();
 			ctpquoter->DepthMarketProcess(msg);
 		} else {

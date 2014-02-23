@@ -1,15 +1,15 @@
-#ifndef MSGQUEUE_H_
-#define MSGQUEUE_H_
+#ifndef MSGQUEUE1_H_
+#define MSGQUEUE1_H_
 #include <iostream>
 #include <vector>
 //#include <sys/sem.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "CtpTrade.h"
+//#include "CtpTrade.h"
 #include "ThostFtdcTraderApi.h"
-#include "CtpTrade.h"
-#include "CtpQuote.h"
+
+//#include "CtpQuote.h"
 #include "../boosthelp.h"
 
 
@@ -62,13 +62,19 @@ enum msgtype {
 };
 
 
-
-
-typedef struct msg_s {
+typedef struct  msg_s{
 	msgtype type;
 	int     len;
 	void    *data;
 }msg_t;
+
+/*
+class msg_t {
+public:
+	msgtype type;
+	int     len;
+	void    *data;
+};*/
 
 typedef struct  {
 }TOnFrontConnected_t;

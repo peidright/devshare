@@ -47,5 +47,5 @@ void test1()
 	//thread_group
 	boost::thread_group tg;
 	tg.add_thread(new boost::thread(worker,"dddd"));
-	tg.add_thread(boost::thread(adapter<workfunc,std::string>(worker,"dddd")));
+	//tg.add_thread(boost::thread(adapter<workfunc,std::string>(worker,"dddd")));
 }

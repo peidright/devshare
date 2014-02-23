@@ -1,32 +1,111 @@
-﻿生成启动时间为 2013/12/6 22:14:09。
-项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”在节点 2 上(Build 个目标)。
-ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\boost_1_54_0 /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\main.cpp
-  main.cpp
-src\main.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-src\main.cpp(68): warning C4018: “<”: 有符号/无符号不匹配
-Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.exe" /INCREMENTAL /NOLOGO /LIBPATH:E:\devshare\resource\CTP_DEMO2013\api_ctp_130402 /LIBPATH:E:\devshare\resource\sqlite308 /LIBPATH:C:\Python34\libs /LIBPATH:"E:\devshare\resource\LuaJIT-2.0.2\src" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\regex\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\thread\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\date_time\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\system\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\chrono\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\signals\build\msvc-11.0\debug\link-static\threading-multi" "libboost_regex-vc110-mt-gd-1_54.lib" lua51.lib python34.lib thosttraderapi.lib thostmduserapi.lib sqlite308.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.lib" /MACHINE:X86 Debug\CTP_DemoLin.res
-  Debug\boosthelp.obj
-  Debug\config.obj
-  Debug\CtpQuote.obj
-  Debug\CtpQuoter.obj
-  Debug\CtpTrade.obj
-  Debug\CtpTrader.obj
-  Debug\datalocal.obj
-  Debug\luajit_support.obj
-  Debug\market.obj
-  Debug\msgqueue.obj
-  Debug\ntp.obj
-  Debug\python_support.obj
-  Debug\Quote.obj
-  Debug\CSem.obj
-  Debug\main.obj
-  Debug\StrategyFrame.obj
-  Debug\trader.obj
-  linux-demo.vcxproj -> E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.exe
-已完成生成项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”(Build 个目标)的操作。
+﻿生成启动时间为 2014/2/23 21:34:45。
+     1>项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\boost_1_54_0 /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt account.cpp boosthelp.cpp config.cpp CtpQuote.cpp CtpQuoter.cpp CtpTrade.cpp CtpTrader.cpp datalocal.cpp dseries.cpp help.cpp luajit_support.cpp market.cpp mdseries.cpp msgqueue.cpp ntp.cpp python_support.cpp Quote.cpp src\CSem.cpp src\main.cpp StrategyFrame.cpp trader.cpp
+         trader.cpp
+         StrategyFrame.cpp
+         main.cpp
+     1>src\main.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>src\main.cpp(68): warning C4018: “<”: 有符号/无符号不匹配
+         CSem.cpp
+         Quote.cpp
+         python_support.cpp
+         ntp.cpp
+     1>ntp.cpp(122): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\time.inl(86) : 参见“ctime”的声明
+     1>ntp.cpp(124): warning C4244: “=”: 从“time_t”转换到“long”，可能丢失数据
+         msgqueue.cpp
+     1>msgqueue.cpp(18): warning C4101: “quote”: 未引用的局部变量
+         mdseries.cpp
+     1>e:\devshare\resource\trader-demo-linux64\dseries.h(54): error C2248: “boost::timed_mutex::timed_mutex”: 无法访问 private 成员(在“boost::timed_mutex”类中声明)
+                 E:\boost_1_54_0\boost/thread/win32/mutex.hpp(51) : 参见“boost::timed_mutex::timed_mutex”的声明
+                 E:\boost_1_54_0\boost/thread/win32/mutex.hpp(47) : 参见“boost::timed_mutex”的声明
+                 此诊断出现在编译器生成的函数“dseries::dseries(const dseries &)”中
+         market.cpp
+         luajit_support.cpp
+         help.cpp
+     1>help.cpp(52): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(58): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(65): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(72): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(81): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(88): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(95): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(102): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+     1>help.cpp(125): warning C4996: 'gmtime': This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\time.inl(99) : 参见“gmtime”的声明
+     1>help.cpp(126): warning C4996: 'gmtime': This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\time.inl(99) : 参见“gmtime”的声明
+         dseries.cpp
+     1>dseries.cpp(79): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>dseries.cpp(86): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+         datalocal.cpp
+     1>datalocal.cpp(64): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : 参见“sprintf”的声明
+     1>datalocal.cpp(97): warning C4101: “ret”: 未引用的局部变量
+         CtpTrader.cpp
+         CtpTrade.cpp
+     1>CtpTrade.cpp(84): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(85): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(86): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(109): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : 参见“sprintf”的声明
+     1>CtpTrade.cpp(116): warning C4101: “f”: 未引用的局部变量
+     1>CtpTrade.cpp(132): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(133): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(157): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(178): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(179): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(207): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(208): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(209): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(236): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(237): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(238): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(239): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(240): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : 参见“sprintf”的声明
+     1>CtpTrade.cpp(291): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(292): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(296): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpTrade.cpp(297): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+         CtpQuoter.cpp
+     1>CtpQuoter.cpp(5): error C2512: “boost::interprocess::interprocess_semaphore”: 没有合适的默认构造函数可用
+         CtpQuote.cpp
+     1>CtpQuote.cpp(88): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpQuote.cpp(89): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+     1>CtpQuote.cpp(90): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : 参见“strcpy”的声明
+         config.cpp
+         boosthelp.cpp
+     1>CL : warning : Boost.Signals is no longer being maintained and is now deprecated. Please switch to Boost.Signals2. To disable this warning message, define BOOST_SIGNALS_NO_DEPRECATION_WARNING.
+         正在生成代码...
+         正在编译...
+         account.cpp
+         正在生成代码...
+     1>已完成生成项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:18.81
+已用时间 00:04:22.00
