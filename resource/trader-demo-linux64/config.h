@@ -21,7 +21,7 @@ extern TThostFtdcUserIDType userId;		// 投资者代码
 extern int requestId; 
 extern CSem sem;
 #define PROD_INFO "Q7 7994"
-
+#define CTP_WORK_THREAD_NUM 8
 // 会话参数
 extern int	 frontId;	//前置编号
 extern int	 sessionId;	//会话编号

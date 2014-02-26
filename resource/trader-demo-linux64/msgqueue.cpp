@@ -15,7 +15,7 @@ void strategy_stm()
 void quote_stm()
 {
 	/*fix mem status,tecical indi, send msg to strategy,quote_io*/
-	msg_t quote;
+	//msg_t quote;
 	while(1) {
 
 	}
@@ -112,6 +112,7 @@ void trade_process()
 }
 void quote_process()
 {
+	/*每个合约,hash到一个key.每个线程，只负责等待这个合约的信号*/
 	while(1) {
 		g_quote_sem.wait();
 		if(g_quote_queue.size() > 0)  {

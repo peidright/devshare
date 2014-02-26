@@ -58,6 +58,6 @@ public:
 	//int ReqUserLogin(char *broker, char *username, char *password);
 };
 
-
+void DepthMarketProcess(CtpQuoter *ctpquoter, int key);
 
 #endif

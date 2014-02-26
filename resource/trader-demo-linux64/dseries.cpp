@@ -80,14 +80,15 @@ int dseries::update_meh(float v, int sec, int msec,period_type ptype, int period
 				if(start_slot==curr_slot) {
 					/*如果是同一分钟*/
 				    this->data[cidx]=std::max<float>(this->data[cidx],v);
-					this->data[cidx]=msec;
+					this->tmsec[cidx]=msec;
+					this->tsec[cidx]=sec;
 				}else if((start_slot+1)==curr_slot){
 					/*如果是新的一分钟*/
 					this->cidx++;
 					cidx=this->cidx;
 					this->tsec[cidx]=now;
 					this->data[cidx]=v;
-					this->data[cidx]=msec;
+					this->tmsec[cidx]=msec;
 				}else if(1/*是同一时间段*/) {
 					/*有可能要考虑补全间隙*/
 

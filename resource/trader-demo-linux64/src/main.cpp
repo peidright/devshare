@@ -31,6 +31,29 @@ CSem sem(0);
 //vector<struct CThostFtdcOrderField *> orderList;
 //vector<struct CThostFtdcTradeField *> tradeList;
 extern void test1();
+
+boost::thread_group g_tg;
+Quoter *g_quoter;
+CtpQuoter *g_ctp_quoter;
+int  ctp_work()
+{
+		int i;
+		//tg.add_thread(boost::thread(adapter<workfunc,std::string>(worker,"dddd")));
+		g_quoter=new Quoter(g_username,g_password,g_brokerid,g_quote_addr);
+		g_ctp_quoter=new CtpQuoter(g_quoter);
+
+		/*
+		
+		*/
+		for (i=0;i<CTP_WORK_THREAD_NUM;i++){
+			g_tg.add_thread(new boost::thread(DepthMarketProcess,g_ctp_quoter,i));
+		}
+
+		getchar();
+		return 0;
+}
+
+
 int main(int argc, char * argv[]){
 	test1();
 	getchar();
@@ -73,10 +96,7 @@ int main(int argc, char * argv[]){
 
 	//Trader *trader=new Trader(g_username,g_password,g_brokerid,g_trade_addr);
 	//CtpTrader *ctp_trader=new CtpTrader(trader);
-
-	Quoter *quoter=new Quoter(g_username,g_password,g_brokerid,g_quote_addr);
-	CtpQuoter *ctp_quoter=new CtpQuoter(quoter);
-
+	ctp_work();
 	getchar();
 	/*
 	api = CThostFtdcTraderApi::CreateFtdcTraderApi("./tlog");

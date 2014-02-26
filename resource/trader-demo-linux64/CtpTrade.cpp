@@ -113,7 +113,7 @@ void CtpTradeSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin,
 		this->login_status=FAIL;
 	}
 	if(pRspInfo->ErrorID==0&&this->confirm==0) {
-			CThostFtdcSettlementInfoConfirmField f;
+		//CThostFtdcSettlementInfoConfirmField f;
 		//memset(&f, 0, sizeof(f));
 		/*send Req SettlementInfoConfirm */
 		//cout<<"send req settlement confirm"<<endl;

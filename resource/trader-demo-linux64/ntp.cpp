@@ -121,7 +121,7 @@ tmit -= 2208988800U;
 //#compare to system time
 printf("Time: %s",ctime(&tmit));
 printf("useconds: %lu",USEC(((UINT32*)buf)[11]));
-i=time(0);
+i=(int)time(0);
 //printf("%d-%d=%d\n",i,tmit,i-tmit);
 printf("System time is %lu seconds off\n",i-tmit);
 }

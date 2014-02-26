@@ -101,6 +101,7 @@ int CtpQuoter::SubscribeMarketData()
 }
 void CtpQuoter::quote_stm(msg_t &msg)
 {
+	/*负责从队列中取数据，进行处理*/
 	int ret;
 	while(msg.type!=QSTOP) {
 		switch(msg.type) {
@@ -156,8 +157,9 @@ void CtpQuoter::quote_stm(msg_t &msg)
 			case QOnRspUserLogout:
 				break;
 			case QOnRtnDepthMarketData:
-				/*io
+				/*以后可能要把行情数据单独用线程来处理
 				*/
+				this->DepthMarketProcess(msg);
 				break;
 			default:
 				break;
@@ -168,37 +170,38 @@ void CtpQuoter::quote_stm(msg_t &msg)
 	}
 }
 
-
-
 int CtpQuoter::DepthMarketProcess(msg_t &msg)
 {
 	/*
+	    这里只处理报价信息。
 	    内存拥有策略所需要的全部数据，io只是定期入库。
 		更新ma
 		发信号量给策略
 		把数据拷贝到io线程等待入库.(暂时io直接入库)
 	*/
-	return 0;
-}
-/*
-int CtpQuoter::ReqUserLogin(char *broker, char *username, char *password)
-{
-	
-	CThostFtdcReqUserLoginField req;
-	memset(&req, 0, sizeof(req));
-	strcpy(req.BrokerID, BROKER_ID);
-	strcpy(req.UserID, INVESTOR_ID);
-	strcpy(req.Password, PASSWORD);
-	int iResult = pUserApi->ReqUserLogin(&req, ++iRequestID);
-	cerr << "--->>> 发送用户登录请求: " << ((iResult == 0) ? "成功" : "失败") << endl;
-	
+	QOnRtnDepthMarketData_t *mdata=(QOnRtnDepthMarketData_t*)msg.data;
+	assert(msg.type==QOnRtnDepthMarketData);
+
+
 
 	return 0;
 }
-*/
+
 void DepthMarketProcess(CtpQuoter *ctpquoter, int key)
 {
-	
+	/*
+	目前所有跟Quote相关的消息，都走这里处理.
+	跟交易相关的信息，都另外用一个状态机处理。
+	loop, 检测是否存在 key, 不存在，sleep ，log.
+	*/
+loop:
+	if (ctpquoter->qsem_map.find(key)==ctpquoter->qsem_map.end()) {
+		/*log it */
+		printf("can not find this slot %d, thread sleep 3 and loop null\n",key);
+		boost::chrono::milliseconds(10000);
+		goto loop;
+	}
+
 	while(ctpquoter->running) {
 		ctpquoter->qsem_map[key]->wait();
 		boost::unique_lock<boost::timed_mutex> lk(*ctpquoter->qmutex_map[key],boost::chrono::milliseconds(1));
@@ -211,7 +214,7 @@ void DepthMarketProcess(CtpQuoter *ctpquoter, int key)
 			msg_t msg=ctpquoter->mqueue_map[key][0];
 			ctpquoter->mqueue_map[key].pop_front();
 			lk.unlock();
-			ctpquoter->DepthMarketProcess(msg);
+			ctpquoter->quote_stm(msg);
 		} else {
 			cout<<"depth market process lk err,thread id: "<<key<<std::endl;
 		}
