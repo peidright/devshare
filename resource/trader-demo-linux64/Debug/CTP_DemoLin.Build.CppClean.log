@@ -1,6 +1,7 @@
 E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\BOOSTHELP.OBJ
 E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\CONFIG.OBJ
 E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\CTPQUOTE.OBJ
+E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\CTPQUOTER.OBJ
 E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\CTPTRADE.OBJ
 E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\CTPTRADER.OBJ
 E:\DEVSHARE\RESOURCE\TRADER-DEMO-LINUX64\DEBUG\DATALOCAL.OBJ
@@ -22,10 +23,15 @@ E:\devshare\resource\trader-demo-linux64\Debug\account.obj
 E:\devshare\resource\trader-demo-linux64\Debug\boosthelp.obj
 E:\devshare\resource\trader-demo-linux64\Debug\config.obj
 E:\devshare\resource\trader-demo-linux64\Debug\CSem.obj
+E:\devshare\resource\trader-demo-linux64\Debug\CtpQuote.obj
+E:\devshare\resource\trader-demo-linux64\Debug\CtpQuoter.obj
+E:\devshare\resource\trader-demo-linux64\Debug\CtpTrade.obj
+E:\devshare\resource\trader-demo-linux64\Debug\CtpTrader.obj
 E:\devshare\resource\trader-demo-linux64\Debug\datalocal.obj
 E:\devshare\resource\trader-demo-linux64\Debug\dseries.obj
 E:\devshare\resource\trader-demo-linux64\Debug\help.obj
 E:\devshare\resource\trader-demo-linux64\Debug\luajit_support.obj
+E:\devshare\resource\trader-demo-linux64\Debug\main.obj
 E:\devshare\resource\trader-demo-linux64\Debug\market.obj
 E:\devshare\resource\trader-demo-linux64\Debug\msgqueue.obj
 E:\devshare\resource\trader-demo-linux64\Debug\ntp.obj

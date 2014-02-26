@@ -11,6 +11,7 @@ typedef enum update_status {
 	NNEXT_BAR,
 	NNNEXT_BAR,
 	PREV_BAR,
+	DEFAULT_BAR,
 }update_status;
 
 class mdseries {

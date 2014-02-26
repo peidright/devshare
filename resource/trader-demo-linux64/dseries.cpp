@@ -18,13 +18,17 @@ int get_period_slot(int sec,int msec, period_type ptype,int period){
 	return sec / factor;
 }
 
+dseries::dseries(){cidx=0;};
+
+dseries::dseries(const dseries &){};
+
 int dseries::update_ms(float v, int sec, int msec){
 		/*
 		  1.
 		  2.
 		*/
 	again:
-		boost::unique_lock<boost::timed_mutex> lk(this->mutex,boost::chrono::milliseconds(1));
+		boost::unique_lock<boost::timed_mutex> lk(this->dmutex,boost::chrono::milliseconds(1));
 		if(lk) {
 			if( (sec > this->csec) || 
 				(sec== this->csec && (msec >this->cmsec))
@@ -362,7 +366,7 @@ int dseries::update_mec(float v, int sec, int msec,period_type ptype, int period
 	
 int dseries::update_me(float v, int sec, int msec,kdata_type type,period_type ptype, int period){
 again:
-		boost::unique_lock<boost::timed_mutex> lk(this->mutex,boost::chrono::milliseconds(1));
+		boost::unique_lock<boost::timed_mutex> lk(this->dmutex,boost::chrono::milliseconds(1));
 		if(lk) {
 			switch(type) {
 			case HIGH:
@@ -390,7 +394,7 @@ again:
 int dseries::callback(float v,int sec, int msec){
 	int ret;
 again:
-		boost::unique_lock<boost::timed_mutex> lk(this->mutex,boost::chrono::milliseconds(1));
+		boost::unique_lock<boost::timed_mutex> lk(this->dmutex,boost::chrono::milliseconds(1));
 		if(lk) {
 		}else {
 			/*warnring*/
@@ -406,7 +410,7 @@ int dseries::update_other(float v, int sec, int msec, period_type ptype,kdata_ty
 	2.
 	*/
 again:
-	boost::unique_lock<boost::timed_mutex> lk(this->mutex,boost::chrono::milliseconds(1));
+	boost::unique_lock<boost::timed_mutex> lk(this->dmutex,boost::chrono::milliseconds(1));
 	if(lk) {
 		switch(ktype) {
 		case HIGH:

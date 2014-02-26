@@ -60,6 +60,8 @@ update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int
 			cout<<"err"<<endl;
 			break;
 	}
+	//	
+	return DEFAULT_BAR;
 }
 	int mdseries::updatems(float v, int b1, int b2) {
 			/*todo lock 
@@ -72,6 +74,7 @@ update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int
 			  如果不是连续的。紧接着更新。
 			  如果是之前的数据。忽略此数据。
 			*/	    
+		return 0;
 	};
 
 	int mdseries::updateme(float v, int b1, int b2) {
@@ -85,7 +88,7 @@ update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int
 			  如果不是连续的。紧接着更新。
 			  如果是之前的数据。忽略此数据。
 			*/
-		    
+		    return  0;
 	};
 
 
@@ -100,9 +103,11 @@ update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int
 
 int md::regmd(int period) {
 		/*注册一个周期*/
+		return 0;
 	};
 int md::drivemd() {
 		/*行情驱动,更新各个周期*/
+	return 0;
 };
 	
 int md::update(string contract, float v, int t1, int t2) {
@@ -155,6 +160,7 @@ int md::update(string contract, float v, int t1, int t2) {
 				status=temp;
 			}
 		}
+		return 0;
 	}
 
 int md::update_timer()
@@ -164,16 +170,24 @@ int md::update_timer()
 			如果当前是xx周期的开始，并且当前周期没有行情，就默认填充行情。
 			只考虑分钟及分钟以上级别周期.
 		*/
+	return 0;
 };
 
 
-int mdservice::md(string contract,int period, int bar){};
-int mdservice::update(string contract, float v, int t1, int t2){};
+int mdservice::md(string contract,int period, int bar){
+
+	return 0;
+};
+int mdservice::update(string contract, float v, int t1, int t2){
+
+	return 0;
+};
 int mdservice::update_timer() {
 		/*
 			每1秒运行一次。
 			如果当前是xx周期的开始，填补默认行情。
 		*/
+	return 0;
 }
 	/*定时器，负责定时更新各个合约的各个周期线
 	  回报，只负责更新其自身对应的那个分钟线。分钟线定时更新上面各个周期的线。

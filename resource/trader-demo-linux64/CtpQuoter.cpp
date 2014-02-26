@@ -1,7 +1,7 @@
 #include "CtpQuoter.h"
 #include "Trader.h"
 #include <deque>
-CtpQuoter::CtpQuoter(Quoter *quoter)
+CtpQuoter::CtpQuoter(Quoter *quoter):qsem(0)
 {
 	/*
 	CThostFtdcTraderApi* trade_api = CThostFtdcTraderApi::CreateFtdcTraderApi(TRADE_DIR);
@@ -35,6 +35,9 @@ CtpQuoter::CtpQuoter(Quoter *quoter)
 	*/
 }
 
+	CtpQuoter::CtpQuoter(const CtpQuoter &):qsem(0){
+		
+	};
 void CtpQuoter::start()
 {
 	CThostFtdcMdApi *quote_api = CThostFtdcMdApi::CreateFtdcMdApi(QUOTE_DIR);
@@ -175,6 +178,7 @@ int CtpQuoter::DepthMarketProcess(msg_t &msg)
 		发信号量给策略
 		把数据拷贝到io线程等待入库.(暂时io直接入库)
 	*/
+	return 0;
 }
 /*
 int CtpQuoter::ReqUserLogin(char *broker, char *username, char *password)
@@ -196,8 +200,8 @@ void DepthMarketProcess(CtpQuoter *ctpquoter, int key)
 {
 	
 	while(ctpquoter->running) {
-		ctpquoter->qsem_map[key].wait();
-		boost::unique_lock<boost::timed_mutex> lk(ctpquoter->qmutex_map[key],boost::chrono::milliseconds(1));
+		ctpquoter->qsem_map[key]->wait();
+		boost::unique_lock<boost::timed_mutex> lk(*ctpquoter->qmutex_map[key],boost::chrono::milliseconds(1));
 		if (lk) {
 			if(ctpquoter->mqueue_map[key].size()<=0) {
 				/*bug happen*/

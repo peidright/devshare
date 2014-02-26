@@ -5,6 +5,7 @@
 #include "CtpTrade.h"
 
 #include <deque>
+#include <map>
 #include "boosthelp.h"
 #include "msgqueue.h"
 class CtpTradeSpi;
@@ -36,9 +37,9 @@ public:
 	boost::interprocess::interprocess_semaphore qsem;
     boost::timed_mutex qmutex;
 	
-	map<int, boost::timed_mutex> qmutex_map;
-	map<int, boost::interprocess::interprocess_semaphore> qsem_map;
-	map<int, std::deque<msg_t>> mqueue_map;
+	map<int, boost::timed_mutex *> qmutex_map;
+	map<int, boost::interprocess::interprocess_semaphore* > qsem_map;
+	map<int, std::deque<msg_t> > mqueue_map;
 
 	//ctpquoter->qsem_map[key].wait();
 	//boost::unique_lock<boost::timed_mutex> lk(ctpquoter->qmutex_map[key],boost::chrono::milliseconds(1));
@@ -46,6 +47,8 @@ public:
 
 
 	CtpQuoter(Quoter *quoter);
+	CtpQuoter(const CtpQuoter &);
+
 	void start();
 	void post_msg(msg_t *msg);
 	void quote_stm(msg_t &msg);

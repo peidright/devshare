@@ -1,7 +1,7 @@
 #ifndef DSERIES_H_
 #define DSERIES_H_
 #include "boosthelp.h"
-
+using namespace boost;
 enum period_type {
 	MIRCO,
 	MINUTE=60,
@@ -24,10 +24,7 @@ public:
 	float data[MAX_DSERIES_SIZE];
 	int   tsec[MAX_DSERIES_SIZE];
 	int   tmsec[MAX_DSERIES_SIZE];
-	float operator[](int i){
-		/*fault tolerent*/
-		return this->data[cidx-i];
-	}
+	timed_mutex dmutex;
 	typedef int (*updatecb)(float ,int,int);
 	updatecb cb;
 	int eidx;
@@ -37,9 +34,9 @@ public:
     int csec,cmsec;
 	int bsec,bmsec;
 	period_type ptype;
-	dseries(){cidx=0;};
+	dseries();
 	dseries(updatecb cb) {this->cb = cb;};
-	boost::timed_mutex mutex;
+	dseries::dseries(const dseries &);
 
 	int update_ms(float v, int sec, int msec);
 	int update_meh(float v, int sec, int msec,period_type ptype, int period);
@@ -48,7 +45,10 @@ public:
 	int update_mec(float v, int sec, int msec,period_type ptype, int period);
 	int update_me(float v, int sec, int msec,kdata_type type,period_type ptype, int period);
 	int update_other(float v, int sec, int msec, period_type ptype,kdata_type ktype,int period);
-
+	float operator[](int i){
+		/*fault tolerent*/
+		return this->data[cidx-i];
+	}
 	int callback(float v,int sec, int msec);
 
 };
