@@ -38,6 +38,11 @@ CtpQuoter::CtpQuoter(Quoter *quoter):qsem(0)
 	CtpQuoter::CtpQuoter(const CtpQuoter &):qsem(0){
 		
 	};
+int  CtpQuoter::init(mdservice *mds)
+{
+	this->mds=mds;
+	return 0;
+}
 void CtpQuoter::start()
 {
 	CThostFtdcMdApi *quote_api = CThostFtdcMdApi::CreateFtdcMdApi(QUOTE_DIR);
@@ -45,6 +50,7 @@ void CtpQuoter::start()
 	quote_api->RegisterSpi((CThostFtdcMdSpi*)quote_spi);
 	quote_api->RegisterFront((char*)quoter->quote_addr.c_str());
 	quote_api->Init();
+	
 	cout<<"i am here"<<endl;
 	getchar();
 }
@@ -174,16 +180,22 @@ int CtpQuoter::DepthMarketProcess(msg_t &msg)
 {
 	/*
 	    这里只处理报价信息。
-	    内存拥有策略所需要的全部数据，io只是定期入库。
-		更新ma
+	    内存拥有策略所需要的全部数据，更新ma
 		发信号量给策略
-		把数据拷贝到io线程等待入库.(暂时io直接入库)
+		
+		?把数据拷贝到io线程等待入库.(暂时io直接入库)
 	*/
 	QOnRtnDepthMarketData_t *mdata=(QOnRtnDepthMarketData_t*)msg.data;
 	assert(msg.type==QOnRtnDepthMarketData);
 
+	
+    
 
 
+	/*
+	   上面处理完后，不应该再有其他地方持有msg.data的指针。将 msg丢到io_queue，待入库。
+	*/
+	mdata->pDepthMarketData->
 	return 0;
 }
 

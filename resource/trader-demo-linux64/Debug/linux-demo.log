@@ -1,4 +1,4 @@
-﻿生成启动时间为 2014/2/26 20:42:31。
+﻿生成启动时间为 2014/2/27 18:35:07。
      1>项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\boost_1_54_0 /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt account.cpp boosthelp.cpp config.cpp CtpQuote.cpp CtpQuoter.cpp CtpTrade.cpp CtpTrader.cpp datalocal.cpp dseries.cpp help.cpp luajit_support.cpp market.cpp mdseries.cpp msgqueue.cpp ntp.cpp python_support.cpp Quote.cpp src\CSem.cpp src\main.cpp StrategyFrame.cpp trader.cpp
@@ -6,7 +6,7 @@
          StrategyFrame.cpp
          main.cpp
      1>src\main.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-     1>src\main.cpp(91): warning C4018: “<”: 有符号/无符号不匹配
+     1>src\main.cpp(117): warning C4018: “<”: 有符号/无符号不匹配
          CSem.cpp
          Quote.cpp
          python_support.cpp
@@ -60,4 +60,4 @@
 
 生成成功。
 
-已用时间 00:05:20.85
+已用时间 00:04:17.67

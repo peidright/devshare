@@ -77,6 +77,11 @@ update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int
 		return 0;
 	};
 
+	mdseries::mdseries(period_type ptype, int period){
+		this->ptype=ptype;
+		this->period=period;
+	};
+
 	int mdseries::updateme(float v, int b1, int b2) {
 			/*todo lock 
 			  1.计算...
@@ -101,8 +106,17 @@ update_status mdseries::get_update_status(int b1,int b2,int e1,int e2,int n1,int
 #define VOLUME_FLAG 0x10
 
 
-int md::regmd(int period) {
-		/*注册一个周期*/
+int md::reg_period(period_type ptype, int period) {
+		/*注册一个周期
+		 check 是否存在
+		*/
+		if (this->mds.find(period)!=this->mds.end()){
+			//log it
+			return -1;
+		}
+	    mdseries *pmds= new mdseries(ptype,period);
+		this->perids.push_back(period);
+		this->mds[period]=pmds;
 		return 0;
 	};
 int md::drivemd() {
@@ -110,7 +124,7 @@ int md::drivemd() {
 	return 0;
 };
 	
-int md::update(string contract, float v, int t1, int t2) {
+int md::update(float v, int t1, int t2) {
 		/*1.更新 ds
 		  2.更新 分钟线。
 		  3.更新 x周期线。
@@ -128,30 +142,30 @@ int md::update(string contract, float v, int t1, int t2) {
 			e1=ds.csec;
 			e2=ds.cmsec;
 			//status=mds[1].update50(c,e1,e2);
-			status=mds[1].updateme(c,e1,e2);
+			status=mds[1]->updateme(c,e1,e2);
 
 
 			/*更新其他周期*/
-			o=mds[1].open[0];
-			c=mds[1].close[0];
-			h=mds[1].high[0];
-			l=mds[1].low[0];
-			e1=mds[1].close.csec;
-			e2=mds[1].close.cmsec;
+			o=mds[1]->open[0];
+			c=mds[1]->close[0];
+			h=mds[1]->high[0];
+			l=mds[1]->low[0];
+			e1=mds[1]->close.csec;
+			e2=mds[1]->close.cmsec;
 
 			for(vector<int>::iterator it=perids.begin();it!=perids.end();it++) {
 				int temp=0;
 				if(status & OPEN_FLAG) {
-					temp=temp | mds[*it].open.update_me(o,e1,e2,OPEN,MIRCO,1);
+					temp=temp | mds[*it]->open.update_me(o,e1,e2,OPEN,MIRCO,1);
 				}
 				if(status & CLOSE_FLAG) {
-					temp=temp | mds[*it].close.update_me(c,e1,e2,CLOSE,MIRCO,1);
+					temp=temp | mds[*it]->close.update_me(c,e1,e2,CLOSE,MIRCO,1);
 				}
 				if(status & HIGH_FLAG) {
-					temp=temp | mds[*it].high.update_me(h,e1,e2,HIGH,MIRCO,1);
+					temp=temp | mds[*it]->high.update_me(h,e1,e2,HIGH,MIRCO,1);
 				}
 				if(status & LOW_FLAG) {
-					temp=temp | mds[*it].low.update_me(l,e1,e2,LOW,MIRCO,1);
+					temp=temp | mds[*it]->low.update_me(l,e1,e2,LOW,MIRCO,1);
 				}
 				if(status & VOLUME_FLAG) {
 					//vol how to process
@@ -179,9 +193,43 @@ int mdservice::md(string contract,int period, int bar){
 	return 0;
 };
 int mdservice::update(string contract, float v, int t1, int t2){
+	int ret;
+	if(this->mds.find(contract)==this->mds.end()) {
+		/*!!!!*/
+		return -1;
+	}
+	ret= this->mds[contract]->update(v,t1,t2);
+	
+	return ret;
+};
 
+int mdservice::regmd(string contract){
+
+	/*
+		1.check 合约合法性
+		2.check 合约是否已经存在
+	*/
+	if(this->mds.find(contract)!=this->mds.end()){
+		/*log it, the contract has existed*/
+		return -1;
+	}
+
+	class md *pmd= new class md();
+	this->mds[contract]=pmd;
 	return 0;
 };
+int mdservice::regmd_period(string contract,period_type ptype, int period){
+	/*1.check 合法性
+	*/
+	if(this->mds.find(contract)==this->mds.end()){
+		/*log it, the contract has not existed*/
+		return -1;
+	}
+	this->mds[contract]->reg_period(ptype,period);
+
+	return 0;
+}
+
 int mdservice::update_timer() {
 		/*
 			每1秒运行一次。

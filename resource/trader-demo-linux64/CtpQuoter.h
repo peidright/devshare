@@ -8,6 +8,8 @@
 #include <map>
 #include "boosthelp.h"
 #include "msgqueue.h"
+#include "mdseries.h"
+
 class CtpTradeSpi;
 class CtpQuoteSpi;
 
@@ -26,7 +28,7 @@ public:
 	//CThostFtdcTraderApi* trade_api
 	CtpQuoteSpi *quote_spi;
 	CThostFtdcMdApi *quote_api;
-
+	mdservice *mds;
 	int running;
 	std::deque<msg_t> mqueue;
 
@@ -48,7 +50,7 @@ public:
 
 	CtpQuoter(Quoter *quoter);
 	CtpQuoter(const CtpQuoter &);
-
+	int  init(mdservice *mds);
 	void start();
 	void post_msg(msg_t *msg);
 	void quote_stm(msg_t &msg);

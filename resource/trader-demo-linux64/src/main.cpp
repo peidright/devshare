@@ -16,7 +16,7 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
-
+#include "../mdseries.h"
 #include "../boosthelp.h"
 using namespace std;
 
@@ -32,23 +32,49 @@ CSem sem(0);
 //vector<struct CThostFtdcTradeField *> tradeList;
 extern void test1();
 
-boost::thread_group g_tg;
+boost::thread_group g_quote_tg;
+boost::thread_group g_trade_tg;
+boost::thread_group g_io_tg;
 Quoter *g_quoter;
 CtpQuoter *g_ctp_quoter;
+mdservice *g_mdservice;
 int  ctp_work()
 {
 		int i;
-		//tg.add_thread(boost::thread(adapter<workfunc,std::string>(worker,"dddd")));
+		/*
+		初始化行情登录
+		*/
 		g_quoter=new Quoter(g_username,g_password,g_brokerid,g_quote_addr);
 		g_ctp_quoter=new CtpQuoter(g_quoter);
-
+		g_mdservice=new mdservice();
 		/*
-		
+		创建线程，专门处理行情的消息
 		*/
 		for (i=0;i<CTP_WORK_THREAD_NUM;i++){
-			g_tg.add_thread(new boost::thread(DepthMarketProcess,g_ctp_quoter,i));
+			g_quote_tg.add_thread(new boost::thread(DepthMarketProcess,g_ctp_quoter,i));
 		}
 
+		g_ctp_quoter->init(g_mdservice);
+
+
+		/*
+		创建线程，专门处理交易的信息
+		for (i=0;i<CTP_WORK_THREAD_NUM;i++){
+			g_trade_tg.add_thread(new boost::thread(DepthMarketProcess,g_ctp_quoter,i));
+		}
+		*/
+
+		/*
+		创建线程，专门负责将行情信息，刷进sqlite
+		for (i=0;i<CTP_WORK_THREAD_NUM;i++){
+		g_io_tg.add_thread(new boost::thread(DepthMarketProcess,g_ctp_quoter,i));
+		}
+		*/
+
+
+		/*
+		创建一组线程，负责各个合约的定时更新行情。
+		*/
 		getchar();
 		return 0;
 }
