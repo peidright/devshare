@@ -195,7 +195,7 @@ int CtpQuoter::DepthMarketProcess(msg_t &msg)
 	/*
 	   上面处理完后，不应该再有其他地方持有msg.data的指针。将 msg丢到io_queue，待入库。
 	*/
-	mdata->pDepthMarketData->
+	//mdata->pDepthMarketData->
 	return 0;
 }
 

@@ -155,6 +155,7 @@
     <ClCompile Include="ntp.cpp" />
     <ClCompile Include="python_support.cpp" />
     <ClCompile Include="Quote.cpp" />
+    <ClCompile Include="quote_io.cpp" />
     <ClCompile Include="src\CSem.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="StrategyFrame.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="ntp.h" />
     <ClInclude Include="python_support.h" />
     <ClInclude Include="quote.h" />
+    <ClInclude Include="quote_io.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StrategyFrame.h" />
     <ClInclude Include="trader.h" />

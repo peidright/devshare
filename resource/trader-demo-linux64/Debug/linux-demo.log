@@ -1,13 +1,14 @@
-﻿生成启动时间为 2014/2/27 18:35:07。
+﻿生成启动时间为 2014/3/1 12:45:43。
      1>项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\boost_1_54_0 /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt account.cpp boosthelp.cpp config.cpp CtpQuote.cpp CtpQuoter.cpp CtpTrade.cpp CtpTrader.cpp datalocal.cpp dseries.cpp help.cpp luajit_support.cpp market.cpp mdseries.cpp msgqueue.cpp ntp.cpp python_support.cpp Quote.cpp src\CSem.cpp src\main.cpp StrategyFrame.cpp trader.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\boost_1_54_0 /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt account.cpp boosthelp.cpp config.cpp CtpQuote.cpp CtpQuoter.cpp CtpTrade.cpp CtpTrader.cpp datalocal.cpp dseries.cpp help.cpp luajit_support.cpp market.cpp mdseries.cpp msgqueue.cpp ntp.cpp python_support.cpp Quote.cpp quote_io.cpp src\CSem.cpp src\main.cpp StrategyFrame.cpp trader.cpp
          trader.cpp
          StrategyFrame.cpp
          main.cpp
      1>src\main.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>src\main.cpp(117): warning C4018: “<”: 有符号/无符号不匹配
          CSem.cpp
+         quote_io.cpp
          Quote.cpp
          python_support.cpp
          ntp.cpp
@@ -21,43 +22,27 @@
          CtpTrader.cpp
          CtpTrade.cpp
          CtpQuoter.cpp
+     1>CtpQuoter.cpp(198): error C2819: “CThostFtdcDepthMarketDataField”类型没有重载成员“operator ->”
+                 e:\devshare\resource\trader-demo-linux64\include\ThostFtdcUserApiStruct.h(742) : 参见“CThostFtdcDepthMarketDataField”的声明
+                 是否改用“.”?
+     1>CtpQuoter.cpp(199): error C2059: 语法错误:“return”
+     1>CtpQuoter.cpp(202): error C2039: “CtpQuoter”: 不是“CThostFtdcDepthMarketDataField”的成员
+                 e:\devshare\resource\trader-demo-linux64\include\ThostFtdcUserApiStruct.h(742) : 参见“CThostFtdcDepthMarketDataField”的声明
+     1>CtpQuoter.cpp(202): error C2039: “ctpquoter”: 不是“CThostFtdcDepthMarketDataField”的成员
+                 e:\devshare\resource\trader-demo-linux64\include\ThostFtdcUserApiStruct.h(742) : 参见“CThostFtdcDepthMarketDataField”的声明
+     1>CtpQuoter.cpp(202): error C2062: 意外的类型“int”
+     1>CtpQuoter.cpp(203): error C2143: 语法错误 : 缺少“;”(在“{”的前面)
+     1>CtpQuoter.cpp(203): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
          CtpQuote.cpp
          config.cpp
-         boosthelp.cpp
-     1>CL : warning : Boost.Signals is no longer being maintained and is now deprecated. Please switch to Boost.Signals2. To disable this warning message, define BOOST_SIGNALS_NO_DEPRECATION_WARNING.
          正在生成代码...
          正在编译...
+         boosthelp.cpp
+     1>CL : warning : Boost.Signals is no longer being maintained and is now deprecated. Please switch to Boost.Signals2. To disable this warning message, define BOOST_SIGNALS_NO_DEPRECATION_WARNING.
          account.cpp
          正在生成代码...
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.0\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\CTP_DemoLin.res" CTP_DemoLin.rc 
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.exe" /INCREMENTAL /NOLOGO /LIBPATH:E:\devshare\resource\CTP_DEMO2013\api_ctp_130402 /LIBPATH:E:\devshare\resource\sqlite308 /LIBPATH:C:\Python34\libs /LIBPATH:"E:\devshare\resource\LuaJIT-2.0.2\src" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\regex\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\thread\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\date_time\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\system\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\chrono\build\msvc-11.0\debug\link-static\threading-multi" /LIBPATH:"E:\boost_1_54_0\bin.v2\libs\signals\build\msvc-11.0\debug\link-static\threading-multi" "libboost_regex-vc110-mt-gd-1_54.lib" lua51.lib python34.lib thosttraderapi.lib thostmduserapi.lib sqlite308.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.lib" /MACHINE:X86 Debug\CTP_DemoLin.res
-         Debug\account.obj
-         Debug\boosthelp.obj
-         Debug\config.obj
-         Debug\CtpQuote.obj
-         Debug\CtpQuoter.obj
-         Debug\CtpTrade.obj
-         Debug\CtpTrader.obj
-         Debug\datalocal.obj
-         Debug\dseries.obj
-         Debug\help.obj
-         Debug\luajit_support.obj
-         Debug\market.obj
-         Debug\mdseries.obj
-         Debug\msgqueue.obj
-         Debug\ntp.obj
-         Debug\python_support.obj
-         Debug\Quote.obj
-         Debug\CSem.obj
-         Debug\main.obj
-         Debug\StrategyFrame.obj
-         Debug\trader.obj
-            正在创建库 E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.lib 和对象 E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.exp
-         linux-demo.vcxproj -> E:\devshare\resource\trader-demo-linux64\Debug\CTP_DemoLin.exe
-     1>已完成生成项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”(Rebuild 个目标)的操作。
+     1>已完成生成项目“E:\devshare\resource\trader-demo-linux64\linux-demo.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:04:17.67
+已用时间 00:04:38.40
