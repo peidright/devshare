@@ -77,6 +77,9 @@ void CtpQuoteSpi::OnFrontConnected()
 	msg->len=0;
 	msg->data=new(QOnFrontConnected_t);
 	msg->type=QOnFrontConnected;
+
+	/**/
+	printf("OnFront Connect DEBUG\n");
     this->ctpquoter->post_msg(msg);
 
 }

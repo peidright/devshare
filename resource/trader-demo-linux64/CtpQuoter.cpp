@@ -33,6 +33,7 @@ CtpQuoter::CtpQuoter(Quoter *quoter):qsem(0)
 	//todo
 	pUserApi->Join();
 	*/
+	this->quoter=quoter;
 }
 
 	CtpQuoter::CtpQuoter(const CtpQuoter &):qsem(0){
@@ -41,15 +42,32 @@ CtpQuoter::CtpQuoter(Quoter *quoter):qsem(0)
 int  CtpQuoter::init(mdservice *mds)
 {
 	this->mds=mds;
+
+	map<int, boost::timed_mutex *> qmutex_map;
+	map<int, boost::interprocess::interprocess_semaphore* > qsem_map;
+	map<int, std::deque<msg_t> > mqueue_map;
+	
+	for (int i=0;i<CTP_WORK_THREAD_NUM;i++){
+		this->qmutex_map[i]=new boost::timed_mutex;
+		this->qsem_map[i]=new boost::interprocess::interprocess_semaphore(0);
+		this->mqueue_map[i]=*(new std::deque<msg_t>);
+	}
 	return 0;
 }
 void CtpQuoter::start()
 {
 	CThostFtdcMdApi *quote_api = CThostFtdcMdApi::CreateFtdcMdApi(QUOTE_DIR);
+		printf("1\n");
 	CtpQuoteSpi *quote_spi = new CtpQuoteSpi(quote_api,this);
+		printf("2\n");
 	quote_api->RegisterSpi((CThostFtdcMdSpi*)quote_spi);
+			printf("3\n");
 	quote_api->RegisterFront((char*)quoter->quote_addr.c_str());
+			printf("4\n");
 	quote_api->Init();
+		printf("5\n");
+
+
 	
 	cout<<"i am here"<<endl;
 	getchar();
@@ -59,6 +77,7 @@ void CtpQuoter::post_msg(msg_t *msg)
 {
 	/*lock
 	*/
+	
 again:
 	boost::unique_lock<boost::timed_mutex> lk(this->qmutex,boost::chrono::milliseconds(1));
 	if(lk) {
@@ -117,8 +136,9 @@ void CtpQuoter::quote_stm(msg_t &msg)
 				msg.type=QSTOP;
 				break;
 			case QOnFrontConnected:
+				cerr <<"md connected stm"<<endl;
+				getchar();
 				msg.type=QReqUserLogin;
-				cerr <<"md connected"<<endl;
 				break;
 			case QOnFrontDisconnected:
 				break;

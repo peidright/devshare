@@ -45,18 +45,22 @@ int  ctp_work()
 		初始化行情登录
 		*/
 		g_quoter=new Quoter(g_username,g_password,g_brokerid,g_quote_addr);
+		printf("Quoter\n");
 		g_ctp_quoter=new CtpQuoter(g_quoter);
+		printf("Ctpquoted\n");
 		g_mdservice=new mdservice();
 		/*
 		创建线程，专门处理行情的消息
 		*/
-		for (i=0;i<CTP_WORK_THREAD_NUM;i++){
+		/*
+		for (i=0;i< CTP_WORK_THREAD_NUM;i++){
 			g_quote_tg.add_thread(new boost::thread(DepthMarketProcess,g_ctp_quoter,i));
-		}
-
+		}*/
+		printf("mdsed\n");
 		g_ctp_quoter->init(g_mdservice);
-
-
+		printf("inited\n");
+		g_ctp_quoter->start();
+		printf("started\n");
 		/*
 		创建线程，专门处理交易的信息
 		for (i=0;i<CTP_WORK_THREAD_NUM;i++){
